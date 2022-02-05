@@ -8,12 +8,20 @@
 </head>
 <body>
     <div id="app">
-        <label v-bind:title="titulo" v-bind:data-hola="saludo">Hola Mundo</label>
+        <label for="">Escribe tu nombre</label>
+        <input type="text" v-model="nombre">
         <hr>
-        <button v-on:click="mostrarImagen('flores.jpg')">Flores</button>
-        <button v-on:click="mostrarImagen('personas.jpg')">Personas</button>
+        <h5>Hola {{ nombre }}</h5>
         <hr>
-        <img v-bind:src="imagen">
+        <select v-model="fruta">
+            <option value="manzana">Manzana</option>
+            <option value="pera">Pera</option>
+            <option value="uva">Uva</option>
+        </select>
+        Fruta seleccionada: {{ fruta }}
+        <hr>
+        <input type="checkbox" v-model="activo">
+        Valor: {{ activo }}
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
@@ -21,15 +29,11 @@
         const app = {
             data() {
                 return {
-                    titulo: 'Este es un título dinámico',
-                    imagen: ''
+                    nombre: '',
+                    fruta: '',
+                    activo: false,
                 }
             },
-            methods: {
-                mostrarImagen(imagen) {
-                    this.imagen = imagen
-                }
-            }
         }
 
         var mountedApp = Vue.createApp(app).mount('#app')
