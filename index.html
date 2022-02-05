@@ -8,30 +8,40 @@
 </head>
 <body>
     <div id="app">
-        <label for="">Escribe tu nombre</label>
-        <input type="text" v-model="nombre">
+        <ul>
+            <li v-for="fruta in frutas" v-bind:key="fruta">{{ fruta }}</li>
+        </ul>
         <hr>
-        <h5>Hola {{ nombre }}</h5>
-        <hr>
-        <select v-model="fruta">
-            <option value="manzana">Manzana</option>
-            <option value="pera">Pera</option>
-            <option value="uva">Uva</option>
+        <ul>
+            <li v-for="(fruta, index) in frutas_con_id" v-bind:key="fruta.id">Índice: {{ index }} {{ fruta.id }} - {{ fruta.nombre }}</li>
+        </ul>
+        <select v-model="fruta_id">
+            <option v-for="fruta in frutas_con_id" v-bind:value="fruta.id">{{ fruta.nombre }}</option>
         </select>
-        Fruta seleccionada: {{ fruta }}
-        <hr>
-        <input type="checkbox" v-model="activo">
-        Valor: {{ activo }}
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script>
         // data, methods, props, mounted, created, computed, watch, destroyed
+        // v-bind, v-model, v-for
         const app = {
             data() {
                 return {
-                    nombre: '',
-                    fruta: '',
-                    activo: false,
+                    fruta_id: 2,
+                    frutas: ['Manzana', 'Pera', 'Uva'],
+                    frutas_con_id: [
+                        {
+                            id: 1,
+                            nombre: 'Manzanas'
+                        },
+                        {
+                            id: 2,
+                            nombre: 'Peras'
+                        },
+                        {
+                            id: 3,
+                            nombre: 'Uvas'
+                        },
+                    ]
                 }
             },
         }
