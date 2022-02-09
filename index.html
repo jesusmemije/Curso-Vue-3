@@ -5,25 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
     <div id="app">
-        <h5 v-if="numero_uno > numero_dos">El número {{ numero_uno }} es mayor que {{ numero_dos }}</h5>
-        <h5 v-else-if="numero_uno == numero_dos">El número {{ numero_uno }} es igual que {{ numero_dos }}</h5>
-        <h5 v-else>El número {{ numero_uno }} es menor que {{ numero_dos }}</h5>
+        <button class="btn indigo darken-4" @click="(contador++)">Haz click</button>
+        {{ contador }}
+        <hr>
+        <button class="btn indigo darken-4" @mouseout="(estado = false)" @mouseover="(estado = true)">Coloca el puntero sobre mi</button>
+        Estado del mouse: {{ estado }}
+        <hr>
+        <select v-on:change="cambiarImagen($event)" class="browser-default">
+            <option value="flores.jpg">Flores</option>
+            <option value="personas.jpg">Personas</option>
+        </select>
+        <img :src="imagen">
     </div>
     <!-- Vue -->
     <script src="https://unpkg.com/vue@next"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
         // data, methods, props, mounted, created, computed, watch, destroyed
         // v-bind, v-model, v-for, v-if, v-else, v-else-if, v-show
+        // keydown, load, mouseout, mouseover
         const app = {
             data() {
                 return {
-                    numero_uno: 6,
-                    numero_dos: 6
+                    contador: 0,
+                    estado: false,
+                    imagen: ''
                 }
             },
+            methods: {
+                cambiarImagen(event) {
+                    this.imagen = event.target.value;
+                }
+            }
         }
         var mountedApp = Vue.createApp(app).mount('#app')
     </script>
