@@ -10,9 +10,20 @@
 </head>
 <body>
     <div id="app">
-        <a href="#" v-if="isAdmin">Administrador</a>
-        <img src="flores.jpg" height="200" v-if="mostrarImg">
-        <img src="personas.jpg" height="200" v-show="mostrarImg">
+        <input type="text" :disabled="(usuarios == 5)">
+        <label>
+            <input type="checkbox" :checked="chkChecked">
+            <span></span>
+        </label>
+        <hr>
+        <form method="POST">
+            <input type="text" :required="isObligatorio">
+            <button type="submit">Enviar</button>
+        </form>
+        <hr>
+        <select class="browser-default">
+            <option v-for="fruta in frutas" :value="fruta.id" :selected="fruta.selected">{{ fruta.id }} - {{ fruta.nombre }}</option>
+        </select>
     </div>
     <!-- Vue -->
     <script src="https://unpkg.com/vue@next"></script>
@@ -26,8 +37,28 @@
         const app = {
             data() {
                 return {
-                    mostrarImg: false,
-                    isAdmin: false
+                    txtDisabled: false,
+                    usuarios: 5,
+                    chkChecked: true,
+                    isObligatorio: true,
+                    frutas: [
+                        {
+                            id: 1,
+                            nombre: 'Manzana',
+                            selected: false
+                        },
+                        {
+                            id: 2,
+                            nombre: 'Pera',
+                            selected: true
+                        },
+                        {
+                            id: 3,
+                            nombre: 'Uva',
+                            selected: false
+                        }
+                    ],
+                    idFruta: 3
                 }
             },
         }
