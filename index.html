@@ -10,17 +10,9 @@
 </head>
 <body>
     <div id="app">
-        <button class="btn indigo darken-4" @click="(contador++)">Haz click</button>
-        {{ contador }}
-        <hr>
-        <button class="btn indigo darken-4" @mouseout="(estado = false)" @mouseover="(estado = true)">Coloca el puntero sobre mi</button>
-        Estado del mouse: {{ estado }}
-        <hr>
-        <select v-on:change="cambiarImagen($event)" class="browser-default">
-            <option value="flores.jpg">Flores</option>
-            <option value="personas.jpg">Personas</option>
-        </select>
-        <img :src="imagen">
+        <a href="#" v-if="isAdmin">Administrador</a>
+        <img src="flores.jpg" height="200" v-if="mostrarImg">
+        <img src="personas.jpg" height="200" v-show="mostrarImg">
     </div>
     <!-- Vue -->
     <script src="https://unpkg.com/vue@next"></script>
@@ -30,19 +22,14 @@
         // data, methods, props, mounted, created, computed, watch, destroyed
         // v-bind, v-model, v-for, v-if, v-else, v-else-if, v-show
         // keydown, load, mouseout, mouseover
+        // v-if, v-show -> Por cuestiones de rendimiento hay que saber cuando utilizar cada uno
         const app = {
             data() {
                 return {
-                    contador: 0,
-                    estado: false,
-                    imagen: ''
+                    mostrarImg: false,
+                    isAdmin: false
                 }
             },
-            methods: {
-                cambiarImagen(event) {
-                    this.imagen = event.target.value;
-                }
-            }
         }
         var mountedApp = Vue.createApp(app).mount('#app')
     </script>
