@@ -7,23 +7,26 @@
     <title>Document</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .rounded {
+            border-radius: 50px;
+        }
+        .square {
+            height: 50px;
+            width: 50px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <input type="text" :disabled="(usuarios == 5)">
-        <label>
-            <input type="checkbox" :checked="chkChecked">
-            <span></span>
-        </label>
-        <hr>
-        <form method="POST">
-            <input type="text" :required="isObligatorio">
-            <button type="submit">Enviar</button>
-        </form>
-        <hr>
-        <select class="browser-default">
-            <option v-for="fruta in frutas" :value="fruta.id" :selected="fruta.selected">{{ fruta.id }} - {{ fruta.nombre }}</option>
-        </select>
+        <div class="container" style="padding-top: 50px;">
+            <div class="teal" v-bind:class="{rounded: i > 5, square:true}"></div>
+            <button @click="(rounded = !rounded)">Cambiar</button>
+            <hr>
+            <div class="teal" v-bind:class="myClass"></div>
+            <hr>
+            <div v-bind:class="[enableRoundedClass ? roundedClass : '', squareClass]"></div>
+        </div>
     </div>
     <!-- Vue -->
     <script src="https://unpkg.com/vue@next"></script>
@@ -37,28 +40,16 @@
         const app = {
             data() {
                 return {
-                    txtDisabled: false,
-                    usuarios: 5,
-                    chkChecked: true,
-                    isObligatorio: true,
-                    frutas: [
-                        {
-                            id: 1,
-                            nombre: 'Manzana',
-                            selected: false
-                        },
-                        {
-                            id: 2,
-                            nombre: 'Pera',
-                            selected: true
-                        },
-                        {
-                            id: 3,
-                            nombre: 'Uva',
-                            selected: false
-                        }
-                    ],
-                    idFruta: 3
+                    myClass: {
+                        rounded: true,
+                        square: true
+                    },
+                    roundedClass: 'rounded red btn',
+                    squareClass: 'square',
+                    enableRoundedClass: true,
+                    rounded: true,
+                    square: true,
+                    i: 5
                 }
             },
         }
